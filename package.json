@@ -1,0 +1,23 @@
+{
+  "name": "datopian---data-wrangling-challenge",
+  "version": "1.0.0",
+  "description": "web scraping program to get data from european road safety facts and figures and turn them to csv",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aldair565/Datopian---Data-Wrangling-Challenge.git"
+  },
+  "author": "Aldair Meraz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aldair565/Datopian---Data-Wrangling-Challenge/issues"
+  },
+  "homepage": "https://github.com/aldair565/Datopian---Data-Wrangling-Challenge#readme",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "cheerio": "^1.0.0-rc.10"
+  }
+}
