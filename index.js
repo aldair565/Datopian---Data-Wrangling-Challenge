@@ -1,10 +1,11 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 const URL = "https://en.wikipedia.org/wiki/Road_safety_in_Europe";
+const fs = require("fs");
 
 async function webScraping(){
     const response = await axios.get(URL);
-    const $ = cheerio.load(response.data);
+    const $ = cheerio.load(response.data); //use cheerio load to convert to an object
     
     const headers = [];
 
@@ -19,6 +20,12 @@ async function webScraping(){
     headers.splice(-3,3); //remove columns after Total Road Deaths Per Million Inhabitants
     headers.splice(1, 0, "Year"); //add Year column
     console.log(headers.join("|"));
+
+    //create csv file with headers delimited by "|" symbol
+    fs.appendFile("European_Union_Road_Safety_Facts_and_Figures.csv", headers.join("|") + "\n", function(err){
+        if (err) throw err;
+        console.log("File created");
+    });
     
     const allRecords = [];
     let record = [];
@@ -28,8 +35,12 @@ async function webScraping(){
             record.push(recordText);
             if (record.length == 11){
                 record.splice(6, 1); //remove Road Network Length column
-                record.splice(-3,3); //remove columns after Total Road Deaths Per Million Inhabitants
+                record.splice(-2,2); //remove columns after Total Road Deaths Per Million Inhabitants
                 record.splice(1, 0, "2018"); // add 2018 year
+                fs.appendFile("European_Union_Road_Safety_Facts_and_Figures.csv", record.join("|") + "\n", function(err){
+                    if (err) throw err;
+                    console.log("New record added");
+                });
                 console.log(record.join("|"));
                 allRecords.push(record);
                 record = [];
